@@ -3,13 +3,10 @@
 
 int main() {
 
-    printf("\n----------\n");
+    printf("\n----------\n\n");
 
     // Create the root directory
-    Directory root = Directory_default;
-    root.name = "/root/";
-
-    // snprintf(target_string, size_of_target_string_in_bytes, "%d", source_int)
+    Directory root = *createRootDirectory();
 
     // Create a file called "hello.txt" in the root directory
     createFile(&root, "hello.txt", ".txt");

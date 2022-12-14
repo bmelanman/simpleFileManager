@@ -1,26 +1,28 @@
 
 #include "FileSys.h"
 
+Directory *createRootDirectory(){
+    return &(Directory) {NULL, NULL, NULL, "/root/", 0, 0};
+}
+
 void createFile(Directory *dir, char *name, char *type) {
 
-    if (dir == NULL) {
-        printf("Error: cannot create file \"%s%s\", given dir is NULL\n\n", name, type);
+    // Make sure the all of our variables exist,
+    // and that the directory isn't full,
+    // and that the file doesn't already exist in the given directory
+    if (dir == NULL || name == NULL || type == NULL) {
+        printf("Error: cannot create file \"%s%s\", one or more inputs are NULL\n\n", name, type);
         return;
-    }
-
-    // check if the directory is full
-    if (dir->num_files >= MAX_NUM_FILES) {
+    } else if (dir->num_files >= MAX_NUM_FILES) {
         printf("Directory is full. Cannot create file.\n");
         return;
+    } else if (getFile(dir, name) != NULL){
+        printf("A file by that name already exists in the given directory");
+        return;
     }
 
-    // TODO: Check if file already exists
-
     // Create the new file
-    File new_file = File_default;
-    new_file.name = name;
-    new_file.type = type;
-    new_file.parent_directory = dir;
+    File new_file = {dir, name, type};
 
     // Increase the size of the files array by 1
     dir->files = (File *) realloc(dir->files, sizeof(File) * (dir->num_files + 1));
@@ -33,29 +35,25 @@ void createFile(Directory *dir, char *name, char *type) {
     dir->files[dir->num_files] = new_file;
     dir->num_files++;
 
-    printf("File \"%s%s\" created successfully.\n", name, type);
+    printf("File \"%s\" created successfully.\n", name);
     printf("File location: %s\n\n", getFileLocation(&new_file));
 }
 
 void createDirectory(Directory *dir, char *name) {
 
-    if (dir == NULL) {
+    if (dir == NULL || name == NULL) {
         printf("Error: cannot create dir \"%s\", given dir is NULL\n\n", name);
         return;
-    }
-
-    // check if the directory is full
-    if (dir->num_subdirs >= MAX_NUM_SUBDIRS) {
+    } else if (dir->num_subdirs >= MAX_NUM_SUBDIRS) {
         printf("Directory is full. Cannot create subdirectory.\n");
+        return;
+    } else if (getDirectory(dir, name) != NULL) {
+        printf("A directory by that name already exists in the given directory");
         return;
     }
 
-    // TODO: Check if directory already exists
-
     // Create the new subdirectory
-    Directory new_dir = Directory_default;
-    new_dir.name = name;
-    new_dir.parent_directory = dir;
+    Directory new_dir = {NULL, dir, NULL, name, 0, 0};
 
     // Increase the size of the subdirectories array by 1
     dir->subdirectories = (Directory *) realloc(dir->subdirectories, sizeof(Directory) * (dir->num_subdirs + 1));
@@ -81,7 +79,6 @@ File *getFile(Directory *dir, char *name) {
 
     // Make sure the directory exists and has at least one directory or file to check
     if (dir->num_subdirs == 0 && dir->num_files == 0) {
-        printf("Directory unavailable\n");
         return NULL;
     }
 
@@ -125,7 +122,6 @@ Directory *getDirectory(Directory *dir, char *name) {
 
     // Make sure the directory exists and has at least one directory
     if (dir->num_subdirs == 0) {
-        printf("Directory unavailable\n");
         return NULL;
     }
 
@@ -286,6 +282,7 @@ void printFileInfo(File *file) {
 
     printf("File Info: \n");
     printf("File name: %s\n", file->name);
+    printf("File type: %s\n", file->type);
     printf("File location: %s\n", getFileLocation(file));
     printf("\n");
 }

@@ -17,22 +17,24 @@ typedef struct File_struct File;
 typedef struct Directory_struct Directory;
 
 // Structs
-static struct File_struct {
+struct File_struct {
     Directory *parent_directory;
     char *name;
     char *type;
-} File_default = {NULL, "", ""};
+};
 
-static struct Directory_struct {
-    char *name;
-    File *files;
-    int num_files;
+struct Directory_struct {
     Directory *subdirectories;
-    int num_subdirs;
     Directory *parent_directory;
-} Directory_default = {"", NULL, 0, NULL, 0, NULL};
+    File *files;
+    char *name;
+    int num_files;
+    int num_subdirs;
+};
 
 // Prototypes
+Directory *createRootDirectory();
+
 void createFile(Directory *dir, char *name, char *type);
 
 void createDirectory(Directory *dir, char *name);
