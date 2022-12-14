@@ -74,29 +74,50 @@ void createDirectory(Directory *dir, char *name) {
 
 File *getFile(Directory *dir, char *name) {
 
-    if (dir == NULL){
-        printf("Cannot find file \"%s\", given dir is NULL", name);
+    if (dir == NULL) {
+        printf("Cannot find dir \"%s\", given dir is NULL", name);
         return NULL;
     }
 
-    // If the directory is empty, return NULL
-    if (dir->num_files == 0 && dir->num_subdirs == 0) {
-        printf("File unavailable\n");
+    // Make sure the directory exists and has at least one directory or file to check
+    if (dir->num_subdirs == 0 && dir->num_files == 0) {
+        printf("Directory unavailable\n");
         return NULL;
     }
 
-    // search through the files in the directory
-    for (int i = 0; i < dir->num_files; i++) {
-        if (strcmp(dir->files[i].name, name) == 0) {
-            return &dir->files[i];
+    // Create a stack and put the top dir in it
+    vector dir_stack = vect_create(1, sizeof(Directory), ZV_BYREF);
+    vect_push(dir_stack, dir);
+
+    Directory *current_dir;
+
+    // Loop through each directory until the entire tree is traversed
+    while (!vect_is_empty(dir_stack)) {
+
+        // Get the next dir off the top of the stack
+        current_dir = vect_pop(dir_stack);
+
+        // Look at files within the directory
+        for (int i = current_dir->num_files - 1; i >= 0; i--) {
+            File *current_file = &current_dir->files[i];
+            // Check if the current file is the one we're looking for
+            if (strcmp(current_file->name, name) == 0) {
+                return current_file;
+            }
+        }
+
+        // Otherwise, put each subdir on the stack
+        for (int i = current_dir->num_subdirs - 1; i >= 0; i--) {
+            vect_push(dir_stack, &current_dir->subdirectories[i]);
         }
     }
+
     return NULL;
 }
 
 Directory *getDirectory(Directory *dir, char *name) {
 
-    if (dir == NULL){
+    if (dir == NULL) {
         printf("Cannot find dir \"%s\", given dir is NULL", name);
         return NULL;
     }
@@ -107,22 +128,26 @@ Directory *getDirectory(Directory *dir, char *name) {
         return NULL;
     }
 
-    // The stack is already declared in Stack.h
-    reset_stack();
-    push(dir);
+    // Create a stack and put the top dir in it
+    vector dir_stack = vect_create(1, sizeof(Directory), ZV_BYREF);
+    vect_push(dir_stack, dir);
 
     Directory *current_dir;
 
-    while (!isEmpty()) {
+    // Loop through each directory until the entire tree is traversed
+    while (!vect_is_empty(dir_stack)) {
 
-        current_dir = pop();
+        // Get the next dir off the top of the stack
+        current_dir = vect_pop(dir_stack);
 
+        // Check if it's the one we're looking for
         if (strcmp(current_dir->name, name) == 0) {
             return current_dir;
         }
 
+        // Otherwise, put each subdir on the stack
         for (int i = current_dir->num_subdirs - 1; i >= 0; i--) {
-            push(&current_dir->subdirectories[i]);
+            vect_push(dir_stack, &current_dir->subdirectories[i]);
         }
     }
 
@@ -131,7 +156,7 @@ Directory *getDirectory(Directory *dir, char *name) {
 
 char *getFileLocation(File *file) {
 
-    if (file == NULL){
+    if (file == NULL) {
         printf("Cannot get file location, given file is NULL!\n");
         return NULL;
     }
@@ -181,7 +206,7 @@ char *getFileLocation(File *file) {
 
 char *getDirLocation(Directory *dir) {
 
-    if (dir == NULL){
+    if (dir == NULL) {
         printf("Cannot get dir location, given dir is NULL!\n");
         return NULL;
     }
@@ -219,7 +244,7 @@ char *getDirLocation(Directory *dir) {
 
 void printDirInfo(Directory *dir) {
 
-    if (dir == NULL){
+    if (dir == NULL) {
         printf("Cannot find dir info, given dir is NULL!");
         return;
     }

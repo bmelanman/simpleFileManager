@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "Stack.h"
-#include "zvector.h"
+#include "zvector/src/zvector.h"
 
 // Defines
 #define MAX_NUM_FILES 20
@@ -14,8 +14,6 @@
 
 // Type definitions
 typedef struct File_struct File;
-
-#define DIR_STRUCT
 typedef struct Directory_struct Directory;
 
 // Structs

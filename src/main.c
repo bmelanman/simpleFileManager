@@ -38,8 +38,9 @@ int main() {
 
     // Search for a file
     File *hello = getFile(&root, "hello");
-    printf("Search for hello.txt: %s", getFileLocation(hello));
-    printf("Search for world.txt: %s", getFileLocation(getFile(&root, "world")));
+    // Print the location of the file in the dir
+    printf("Search for hello.txt: %s\n", getFileLocation(hello));
+    printf("Search for cat.jpg: %s\n", getFileLocation(getFile(&root, "cat")));
 }
 
 //void printDirTree(Directory *dir) {
