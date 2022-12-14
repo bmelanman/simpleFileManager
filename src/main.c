@@ -7,14 +7,14 @@ int main() {
 
     // Create the root directory
     Directory root = Directory_default;
-    root.name = "/";
+    root.name = "/root/";
 
     // snprintf(target_string, size_of_target_string_in_bytes, "%d", source_int)
 
     // Create a file called "hello.txt" in the root directory
-    createFile(&root, "hello", ".txt");
+    createFile(&root, "hello.txt", ".txt");
     // Create a file called "test.c" in the root directory
-    createFile(&root, "test", ".c");
+    createFile(&root, "test.c", ".c");
 
     // Create a directory called "docs" in the root directory
     createDirectory(&root, "docs/");
@@ -24,37 +24,26 @@ int main() {
     // Grab the doc directory
     Directory *docs = getDirectory(&root, "docs/");
     // Create a file called "world.txt" in the "docs" directory
-    createFile(docs, "hw3", ".pdf");
+    createFile(docs, "hw3.pdf", ".pdf");
     // Create a file called "world.txt" in the "docs" directory
-    createFile(docs, "lab1", ".py");
+    createFile(docs, "lab1.py", ".py");
 
     // Create a folder in the "docs" directory
     createDirectory(docs, "taxes/");
     // Create a file called "world.txt" in the "docs" directory
-    createFile(getDirectory(&root, "taxes/"), "cat", ".jpg");
+    createFile(getDirectory(&root, "taxes/"), "cat.jpg", ".jpg");
 
     // Find a folder nested 2 folders deep: /docs/taxes/
     printDirInfo(getDirectory(&root, "taxes/"));
+    // Print info about a file
+    printFileInfo(getFile(&root, "cat.jpg"));
 
     // Search for a file
-    File *hello = getFile(&root, "hello");
+    File *hello = getFile(&root, "hello.txt");
     // Print the location of the file in the dir
     printf("Search for hello.txt: %s\n", getFileLocation(hello));
-    printf("Search for cat.jpg: %s\n", getFileLocation(getFile(&root, "cat")));
+    printf("Search for cat.jpg: %s\n", getFileLocation(getFile(&root, "cat.jpg")));
+
+    // Print out a directory tree
+    printDirTree(&root);
 }
-
-//void printDirTree(Directory *dir) {
-//
-//    char *dir_name = dir->name;
-//
-//    printf("%s\n", dir_name);
-//
-//    for (int i = 0; i < dir->num_files; i++) {
-//        printf("%s\n", getFileLocation(&dir->files[i]));
-//    }
-//
-//    for (int j = 0; j < dir->num_subdirs; j++) {
-//        printf("%s\n", getDirLocation(&dir->subdirectories[j]));
-//    }
-//}
-

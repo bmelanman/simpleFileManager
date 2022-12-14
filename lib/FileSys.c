@@ -90,6 +90,7 @@ File *getFile(Directory *dir, char *name) {
     vect_push(dir_stack, dir);
 
     Directory *current_dir;
+    File *current_file;
 
     // Loop through each directory until the entire tree is traversed
     while (!vect_is_empty(dir_stack)) {
@@ -99,7 +100,7 @@ File *getFile(Directory *dir, char *name) {
 
         // Look at files within the directory
         for (int i = current_dir->num_files - 1; i >= 0; i--) {
-            File *current_file = &current_dir->files[i];
+            current_file = &current_dir->files[i];
             // Check if the current file is the one we're looking for
             if (strcmp(current_file->name, name) == 0) {
                 return current_file;
@@ -163,7 +164,7 @@ char *getFileLocation(File *file) {
 
     // TODO: Memory Leak
     // Create and allocate a variable for the file directory
-    char *file_dir = (char *) malloc(strlen(file->name) + strlen(file->type) + 1);
+    char *file_dir = (char *) malloc(strlen(file->name) + 1);
     // Memory allocation error handling
     if (file_dir == NULL) {
         printf("Malloc error occurred in getFileLocation - file_dir");
@@ -171,8 +172,8 @@ char *getFileLocation(File *file) {
         exit(-1);
     }
 
-    // Concatenate the name and type together and store in the file dir: "test" + ".txt" = "test.txt"
-    snprintf(file_dir, strlen(file->name) + strlen(file->type) + 1, "%s%s", file->name, file->type);
+    // Copy the file name to the file_dir
+    strcpy(file_dir, file->name);
 
     // Create a temp variable for the file_dir
     char *temp;
@@ -274,4 +275,45 @@ void printDirInfo(Directory *dir) {
         printf("No parent directory\n");
     }
     printf("\n");
+}
+
+void printFileInfo(File *file) {
+
+    if (file == NULL) {
+        printf("Cannot find dir info, given dir is NULL!");
+        return;
+    }
+
+    printf("File Info: \n");
+    printf("File name: %s\n", file->name);
+    printf("File location: %s\n", getFileLocation(file));
+    printf("\n");
+}
+
+void printDirTree(Directory *dir) {
+
+    // Create a stack and put the top dir in it
+    vector dir_stack = vect_create(1, sizeof(Directory), ZV_BYREF);
+    vect_push(dir_stack, dir);
+
+    Directory *current_dir;
+    printf("\nDirectory Tree: \n");
+
+    // Loop through each directory until the entire tree is traversed
+    while (!vect_is_empty(dir_stack)) {
+
+        // Get the next dir off the top of the stack
+        current_dir = vect_pop(dir_stack);
+        printf("%s\n", getDirLocation(current_dir));
+
+        // Look at files within the directory
+        for (int i = current_dir->num_files - 1; i >= 0; i--) {
+            printf("- %s\n", current_dir->files[i].name);
+        }
+
+        // Otherwise, put each subdir on the stack
+        for (int i = current_dir->num_subdirs - 1; i >= 0; i--) {
+            vect_push(dir_stack, &current_dir->subdirectories[i]);
+        }
+    }
 }

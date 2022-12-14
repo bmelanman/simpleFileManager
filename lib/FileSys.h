@@ -45,6 +45,10 @@ File *getFile(Directory *dir, char *name);
 
 Directory *getDirectory(Directory *dir, char *name);
 
+void printFileInfo(File *file);
+
 void printDirInfo(Directory *dir);
+
+void printDirTree(Directory *dir);
 
 #endif //FILE_MANAGER_FILESYS_H
