@@ -1,0 +1,6 @@
+# ninja log v5
+109	151	1670975731772353339	untitled	12d59b48c50fcc37
+1	35	1671001020513651076	CMakeFiles/file_manager.dir/main.c.o	ac75056e0d21d3eb
+36	74	1671001020553202000	file_manager	fd8f79de315dc47f
+1	33	1671000966376969848	CMakeFiles/file_manager.dir/Stack.c.o	a716b048d55ccf7b
+1	48	1671000966391655747	CMakeFiles/file_manager.dir/FileSys.c.o	ed625fb484a1057f
