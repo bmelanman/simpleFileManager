@@ -7,6 +7,7 @@ Current functionality includes:
 - Get nested directories and files
 - Get the path of a directory or file from a given directory
 - Print directory and file debug info to screen
+- Print the file tree of a given file
 
 I don't currently have any big plans for the future of this project, so we'll see 
 where this ends up. 
