@@ -1,3 +1,5 @@
+/Users/brycemelander/Code/simpleFileManager/cmake-build-release/CMakeFiles/FileSys.dir
+/Users/brycemelander/Code/simpleFileManager/cmake-build-release/CMakeFiles/zVector.dir
 /Users/brycemelander/Code/simpleFileManager/cmake-build-release/CMakeFiles/file_manager.dir
 /Users/brycemelander/Code/simpleFileManager/cmake-build-release/CMakeFiles/edit_cache.dir
 /Users/brycemelander/Code/simpleFileManager/cmake-build-release/CMakeFiles/rebuild_cache.dir
