@@ -33,3 +33,7 @@ cmake-build-release/build.ninja
 cmake-build-release/CMakeFiles/clion-log.txt
 cmake-build-release/CMakeFiles/rules.ninja
 cmake-build-release/CMakeFiles/TargetDirectories.txt
+/cmake-build-debug/
+/cmake-build-release/
+*.[oa]
+
