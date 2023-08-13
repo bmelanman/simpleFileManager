@@ -1,4 +1,6 @@
 
-/cmake-build-*/**
-*.[oa]
-*.log
+/cmake-build-*/**/
+**.[oa]
+**.log
+**.ninja
+**/.ninja_*

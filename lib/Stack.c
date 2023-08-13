@@ -1,10 +1,15 @@
 
+#include <stdio.h>
 #include "Stack.h"
 
-// Global Variables
-Stack *dir_stack = NULL;
-
 void push(Directory *new_dir) {
+    // TODO: NULL check
+    // Make sure the struct exists
+    if (new_dir == NULL) {
+        fprintf(stderr, "Fatal: Stack struct is NULL.\n");
+        exit(EXIT_FAILURE);
+    }
+
     // Make a new node
     Stack *node_ptr = malloc(sizeof(Stack));
     // Add dir and next

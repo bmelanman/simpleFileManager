@@ -12,6 +12,7 @@ A simple file system manager written in C. The system is written mostly from scr
 
 ## Ideas for the Future:
 - Symbolic Links (Soft/Hard)
+- Implement a stack to replace ZVector
 - Improved UI
 - Implement common commands (`cd`, `ls`, `find`, etc...)
 
