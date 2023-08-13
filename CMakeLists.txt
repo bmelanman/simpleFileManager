@@ -3,9 +3,13 @@ project(file_manager)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_library(FileSys lib/FileSys.c lib/FileSys.h)
-#add_library(Stack lib/Stack.c lib/Stack.h)
+add_library(utils lib/utils.c lib/utils.h)
+link_libraries(utils)
+
+add_library(Stack lib/Stack.c lib/Stack.h)
 add_library(zVector lib/zvector/src/zvector.c lib/zvector/src/zvector.h)
+
+add_library(FileSys lib/FileSys.c lib/FileSys.h)
 
 add_executable(file_manager src/main.c src/main.h)
 

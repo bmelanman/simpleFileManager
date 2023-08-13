@@ -5,6 +5,7 @@
 // Imports
 #include <stdio.h>
 #include <string.h>
+#include "utils.h"
 #include "Stack.h"
 #include "zvector/src/zvector.h"
 

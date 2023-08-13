@@ -2,14 +2,25 @@
 #include "FileSys.h"
 
 Directory *createRootDirectory(){
-    return &(Directory) {NULL, NULL, NULL, "/root/", 0, 0};
+
+    Directory *new_directory = scalloc(1, sizeof(Directory));
+
+    new_directory->name = "/root/";
+
+    new_directory->num_subdirs = 0;
+    new_directory->subdirectories = NULL;
+    new_directory->parent_directory = NULL;
+
+    new_directory->num_files = 0;
+    new_directory->files = NULL;
+
+    return new_directory;
 }
 
 void createFile(Directory *dir, char *name, char *type) {
 
-    // Make sure the all of our variables exist,
-    // and that the directory isn't full,
-    // and that the file doesn't already exist in the given directory
+    // Make sure that all of our variables exist, and that the directory isn't full,
+    // and that the file doesn't already exist in the given directory.
     if (dir == NULL || name == NULL || type == NULL) {
         printf("Error: cannot create file \"%s%s\", one or more inputs are NULL\n\n", name, type);
         return;
@@ -25,11 +36,7 @@ void createFile(Directory *dir, char *name, char *type) {
     File new_file = {dir, name, type};
 
     // Increase the size of the files array by 1
-    dir->files = (File *) realloc(dir->files, sizeof(File) * (dir->num_files + 1));
-    // Memory allocation error handling
-    if (dir->files == NULL) {
-        exit(-1);
-    }
+    dir->files = (File *) srealloc(dir->files, sizeof(File) * (dir->num_files + 1));
 
     // Add the file to the directory
     dir->files[dir->num_files] = new_file;
@@ -56,11 +63,7 @@ void createDirectory(Directory *dir, char *name) {
     Directory new_dir = {NULL, dir, NULL, name, 0, 0};
 
     // Increase the size of the subdirectories array by 1
-    dir->subdirectories = (Directory *) realloc(dir->subdirectories, sizeof(Directory) * (dir->num_subdirs + 1));
-    // Memory allocation error handling
-    if (dir->subdirectories == NULL) {
-        exit(-1);
-    }
+    dir->subdirectories = (Directory *) srealloc(dir->subdirectories, sizeof(Directory) * (dir->num_subdirs + 1));
 
     // Add the subdirectory to the parent directory
     dir->subdirectories[dir->num_subdirs] = new_dir;
@@ -70,6 +73,7 @@ void createDirectory(Directory *dir, char *name) {
     printf("Directory location: %s\n\n", getDirLocation(&new_dir));
 }
 
+// TODO: Create search function using hashmap for internal searches only (private function)
 File *getFile(Directory *dir, char *name) {
 
     if (dir == NULL) {
@@ -160,7 +164,7 @@ char *getFileLocation(File *file) {
 
     // TODO: Memory Leak
     // Create and allocate a variable for the file directory
-    char *file_dir = (char *) malloc(strlen(file->name) + 1);
+    char *file_dir = (char *) scalloc(1, strlen(file->name) + 1);
     // Memory allocation error handling
     if (file_dir == NULL) {
         printf("Malloc error occurred in getFileLocation - file_dir");
