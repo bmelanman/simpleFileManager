@@ -1,14 +1,10 @@
 # ninja log v5
-0	38	1671145745157744054	build.ninja	2a97323c610654c
+0	38	1691896718966198627	build.ninja	2a97323c610654c
 0	6	0	clean	3c8e6cc385ee00ba
-1	33	1671039316134408739	CMakeFiles/file_manager.dir/main.c.o	756831dec7987314
 1	37	1671052130664145560	CMakeFiles/FileSys.dir/lib/FileSys.c.o	e26f5616ed4967cf
 31	50	1671040918366152000	libStack.a	19333025e01b7f09
-1	80	1671052130707109544	CMakeFiles/zVector.dir/lib/zvector/src/zvector.c.o	f71689b96f7d42bf
-1	35	1671039316137296839	CMakeFiles/file_manager.dir/FileSys.c.o	f870771492e5f51f
 1	32	1671052130659359927	CMakeFiles/file_manager.dir/src/main.c.o	1f9c0b6c77d917d2
+1	80	1671052130707109544	CMakeFiles/zVector.dir/lib/zvector/src/zvector.c.o	f71689b96f7d42bf
 99	137	1671052130764879677	file_manager	db744e67303f36fd
-1	32	1671039316134075196	CMakeFiles/file_manager.dir/Stack.c.o	f991b1eea71f90f9
-1	30	1671040918344917772	CMakeFiles/Stack.dir/lib/Stack.c.o	e53313f4c9d30760
 80	99	1671052130728025000	libzVector.a	9f513e44c60babda
 37	56	1671052130684499000	libFileSys.a	b59f4be25de27d1c

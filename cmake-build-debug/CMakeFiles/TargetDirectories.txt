@@ -1,5 +1,5 @@
-/Users/brycemelander/Code/simpleFileManager/cmake-build-debug/CMakeFiles/FileSys.dir
-/Users/brycemelander/Code/simpleFileManager/cmake-build-debug/CMakeFiles/zVector.dir
-/Users/brycemelander/Code/simpleFileManager/cmake-build-debug/CMakeFiles/file_manager.dir
-/Users/brycemelander/Code/simpleFileManager/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/brycemelander/Code/simpleFileManager/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/brycemelander/Code/GitHub/random_projects/simpleFileManager/cmake-build-debug/CMakeFiles/FileSys.dir
+/Users/brycemelander/Code/GitHub/random_projects/simpleFileManager/cmake-build-debug/CMakeFiles/zVector.dir
+/Users/brycemelander/Code/GitHub/random_projects/simpleFileManager/cmake-build-debug/CMakeFiles/file_manager.dir
+/Users/brycemelander/Code/GitHub/random_projects/simpleFileManager/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/brycemelander/Code/GitHub/random_projects/simpleFileManager/cmake-build-debug/CMakeFiles/rebuild_cache.dir
